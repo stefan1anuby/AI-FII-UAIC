@@ -1,0 +1,1 @@
+Teme pentru laboratoarele la Inteligenta Artificiala UAIC FII
