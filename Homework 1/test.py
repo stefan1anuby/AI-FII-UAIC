@@ -28,15 +28,15 @@ class BoardTest(unittest.TestCase):
 	def test_iddfs(self):
 
 		puzzle = Board([[8, 6, 7], [2, 5, 4], [0, 3, 1]])
-		solution = iddfs(puzzle, depth=100)
+		solution = iddfs(puzzle, 100)
 		self.assertTrue(solution.is_goal())
-
+	
 		puzzle2 = Board([[2, 5, 3], [1, 0, 6], [4, 7, 8]])
-		solution2 = iddfs(puzzle2, depth=100)
+		solution2 = iddfs(puzzle2, 100)
 		self.assertTrue(solution2.is_goal())
 
 		puzzle3 = Board([[2, 7 , 5], [0, 8, 4], [3, 1, 6]])
-		solution3 = iddfs(puzzle3, depth=100)
+		solution3 = iddfs(puzzle3, 100)
 		self.assertTrue(solution3.is_goal())
 		
 

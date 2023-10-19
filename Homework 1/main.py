@@ -46,29 +46,24 @@ class Board:
     def print_state(self , message = "The state is :"):
         print(message)
         [[[print(self.state[i][j], end=" ") for j in range(len(self.state[0]))] and print(" ")] for i in range(len(self.state))]
-    
 
-def iddfs(board, depth):
-    
-    stack = [(board, 0)]
-    while stack:
-        current_state, d = stack.pop()
-          
-        if current_state.is_goal():
-            return current_state
-          
-        if d < depth:
-            for index , move in enumerate(current_state.possible_moves()):
-                
-                next_state = current_state.make_move(move)
-                    
-                if next_state is not None:
-                    #print(f"Depth : {d} , Node index : {index}")
-                    #current_state.print_state("Before moving :")
-                    #next_state.print_state("After moving :")
-                    stack.append((next_state, d + 1))
-    
-            
+def iddfs(root, max_depth):
+    for depth in range(max_depth):
+        found = dls(root, depth)
+        if found is not None:
+            return found
+    return None
+
+def dls(node, depth):
+    if depth == 0 and node.is_goal():
+        return node
+    elif depth > 0:
+        for move in node.possible_moves():
+            next_node = node.make_move(move)
+            found = dls(next_node, depth - 1)
+            if found is not None:
+                return found
+    return None
 
 def main():
     print("Calling main")
