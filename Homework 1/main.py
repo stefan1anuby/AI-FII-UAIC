@@ -65,6 +65,45 @@ def dls(node, depth):
                 return found
     return None
 
+def greedy_search(puzzle, heuristic_func):
+    visited = set()
+    queue = [puzzle]
+
+    while queue:
+        current_state = min(queue, key=heuristic_func)
+        queue.remove(current_state)
+
+        if current_state.is_goal():
+            return current_state
+
+        for move in current_state.possible_moves():
+            next_state = current_state.make_move(move)
+            if str(next_state.state) not in visited:
+                visited.add(str(next_state.state))
+                queue.append(next_state)
+
+    return None
+
+def manhattan_distance(board):
+        distance = 0
+        for i in range(3):
+            for j in range(3):
+                if board.state[i][j] == 0:
+                    continue
+                correct_i, correct_j = (board.state[i][j]-1) // 3, (board.state[i][j]-1) % 3
+                distance += abs(correct_i - i) + abs(correct_j - j)
+        return distance
+
+def hamming_distance(board):
+    distance = 0
+    for i in range(3):
+        for j in range(3):
+            if board.state[i][j] == 0:
+                continue
+            if board.state[i][j] != i * 3 + j + 1:
+                distance += 1
+    return distance
+
 def main():
     print("Calling main")
 
