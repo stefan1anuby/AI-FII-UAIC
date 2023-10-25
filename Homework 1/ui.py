@@ -1,6 +1,6 @@
 import threading
 from datetime import datetime
-from main import Board, iddfs, greedy_search, manhattan_distance, hamming_distance
+from main import Board, iddfs, greedy_search, manhattan_distance, hamming_distance, euclidean_distance
 
 def iddfs_thread(puzzle, depth):
     initial_state = puzzle.state
@@ -58,12 +58,14 @@ def run_all():
     run_iddfs()
     run_greedy(hamming_distance)
     run_greedy(manhattan_distance)
+    run_greedy(euclidean_distance)
 
 def selection(selection):
     match selection:
         case 1: run_iddfs()
         case 2: run_greedy(hamming_distance)
         case 3: run_greedy(manhattan_distance)
+        case 4: run_greedy(euclidean_distance)
         case 5: run_all()
         case _: print(f"Invalid selection")
 
@@ -71,6 +73,7 @@ def main():
     print("1: Run iddfs")
     print("2: Run Greedy using Hamming Distance")
     print("3: Run Greedy using Manhattan Distance")
+    print("4: Run Greedy using Euclidean Distance")
     print("5: Run all")
     
     selection(int(input()))
