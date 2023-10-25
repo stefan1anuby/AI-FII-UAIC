@@ -8,8 +8,10 @@ class Board:
         self.last_move = last_move
 
     def is_goal(self):
-        current_state = [item for sublist in self.state for item in sublist if item != 0]
-        return current_state == [1, 2, 3, 4, 5, 6, 7, 8]
+        return self.get_current_state_as_list() == [1, 2, 3, 4, 5, 6, 7, 8]
+    
+    def get_current_state_as_list(self):
+        return [item for sublist in self.state for item in sublist if item != 0]
     
     def possible_moves(self):
         moves = []
@@ -103,6 +105,7 @@ def manhattan_distance(board):
     return distance
 
 def hamming_distance(board):
+    # numărul de celule care nu sunt în poziția lor corectă.
     distance = 0
     for i in range(3):
         for j in range(3):
@@ -119,7 +122,28 @@ def euclidean_distance(board):
             if board.state[i][j] == 0:
                 continue
             else:
-                distance += sqrt()
+                curr_num = board.state[i][j]
+                final_num = i * 3 + j + 1
+                distance += (curr_num - final_num)**2
+    return sqrt(distance)
+
+def manhattan_distance_as_list(board):
+    curr_state = board.get_current_state_as_list()
+    final_state = [1, 2, 3, 4, 5, 6, 7, 8]
+
+    return sum(abs(x - y) for x , y in zip(curr_state,final_state))
+
+def hamming_distance_as_list(board):
+    curr_state = board.get_current_state_as_list()
+    final_state = [1, 2, 3, 4, 5, 6, 7, 8]
+
+    return sum(x != y for x , y in zip(curr_state,final_state))
+
+def euclidean_distance_as_list(board):
+    curr_state = board.get_current_state_as_list()
+    final_state = [1, 2, 3, 4, 5, 6, 7, 8]
+
+    return sqrt(sum((x-y)**2 for x, y in zip(curr_state,final_state)))
 
 def main():
     print("Calling main")
