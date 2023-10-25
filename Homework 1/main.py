@@ -1,4 +1,5 @@
 import copy
+from math import sqrt
 
 class Board:
 
@@ -48,11 +49,16 @@ class Board:
         [[[print(self.state[i][j], end=" ") for j in range(len(self.state[0]))] and print(" ")] for i in range(len(self.state))]
 
 def iddfs(root, max_depth):
+    iterations = 0
+    
     for depth in range(max_depth):
         found = dls(root, depth)
+        iterations += 1
         if found is not None:
-            return found
-    return None
+            # return found
+            return True, found, iterations
+    # return None
+    return False, None, iterations
 
 def dls(node, depth):
     if depth == 0 and node.is_goal():
@@ -66,6 +72,7 @@ def dls(node, depth):
     return None
 
 def greedy_search(puzzle, heuristic_func):
+    iterations = 0
     visited = set()
     queue = [puzzle]
 
@@ -74,25 +81,26 @@ def greedy_search(puzzle, heuristic_func):
         queue.remove(current_state)
 
         if current_state.is_goal():
-            return current_state
+            return True, current_state, iterations
 
         for move in current_state.possible_moves():
             next_state = current_state.make_move(move)
             if str(next_state.state) not in visited:
                 visited.add(str(next_state.state))
                 queue.append(next_state)
+                iterations += 1
 
-    return None
+    return False, None, iterations
 
 def manhattan_distance(board):
-        distance = 0
-        for i in range(3):
-            for j in range(3):
-                if board.state[i][j] == 0:
-                    continue
-                correct_i, correct_j = (board.state[i][j]-1) // 3, (board.state[i][j]-1) % 3
-                distance += abs(correct_i - i) + abs(correct_j - j)
-        return distance
+    distance = 0
+    for i in range(3):
+        for j in range(3):
+            if board.state[i][j] == 0:
+                continue
+            correct_i, correct_j = (board.state[i][j]-1) // 3, (board.state[i][j]-1) % 3
+            distance += abs(correct_i - i) + abs(correct_j - j)
+    return distance
 
 def hamming_distance(board):
     distance = 0
@@ -103,6 +111,15 @@ def hamming_distance(board):
             if board.state[i][j] != i * 3 + j + 1:
                 distance += 1
     return distance
+
+def euclidean_distance(board):
+    distance = 0
+    for i in range(3):
+        for j in range(3):
+            if board.state[i][j] == 0:
+                continue
+            else:
+                distance += sqrt()
 
 def main():
     print("Calling main")
