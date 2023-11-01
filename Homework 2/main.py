@@ -8,7 +8,7 @@ sudoku = [
     [7, 0, 0, 0, 2, 0, 0, 0, 6],
     [0, 6, 0, 0, 0, 0, 2, 8, 0],
     [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+    [0, 0, 0, 0, 8, -1, 0, 7, 9]
 ]
 
 sudoku_2 = [
@@ -16,11 +16,11 @@ sudoku_2 = [
     [9, 0, 0, 3, 0, 5, 0, 0, 1],
     [0, 0, 1, 8, 0, 6, 4, 0, 0],
     [0, 0, 8, 1, 0, 2, 9, 0, 0],
-    [7, 0, 0, 0, 0, 0, 0, 0, 8],
+    [7, 0, 0, 0, -1, 0, 0, 0, 8],
     [0, 0, 6, 7, 0, 8, 2, 0, 0],
     [0, 0, 2, 6, 0, 9, 5, 0, 0],
     [8, 0, 0, 2, 0, 3, 0, 0, 9],
-    [0, 0, 5, 0, 1, 0, 3, 0, 0]
+    [0, 0, 5, 0, 1, 0, 3, 0, -1]
 ]
 
 sudoku_3 = [
@@ -29,7 +29,7 @@ sudoku_3 = [
     [ 0, 0, 0, 4, 0, 9, 0, 0, 0],
     [ 0, 2, 3, 0, 0, 0, 9, 8, 0],
     [ 1, 0, 0, 0, 0, 0, 0, 0, 4],
-    [ 0, 9, 8, 9, 0, 0, 1, 6, 0],
+    [ 0, 9, 8, 0, 0, 0, 1, 6, 0],
     [ 0, 0, 0, 5, 0, 3, 0, 0, 0],
     [ 0, 3, 0, 1, 0 ,6, 0, 0, 7],
     [ 0, 0, 0, 0, 2, 0, 0, 1, 3]
@@ -41,11 +41,59 @@ sudoku_final_test = [
     [ 0, 0,-1, 4, 0, 9, 0, 0,-1],
     [ 0, 2, 3, 0,-1, 0, 9, 8, 0],
     [ 1, 0, 0,-1, 0,-1, 0, 0, 4],
-    [ 0, 9, 8, 9,-1, 0, 1, 6, 0],
+    [ 0, 9, 8, 0,-1, 0, 1, 6, 0],
     [-1, 0, 0, 5, 0, 3,-1, 0, 0],
     [ 0, 3, 0, 1, 0 ,6, 0, 0, 7],
     [ 0, 0,-1, 0, 2, 0, 0, 1, 3]
 ]
+
+
+
+
+evil   = [[0, 6, 0, 8, 0, 0, 0, 0, 0],
+              [0, 0, 4, 0, 6, 0, 0, 0, 9],
+              [1, 0, 0, 0, 4, 3, 0, 6, 0],
+              [0, 5, 2, 0, 0, 0, 0, 0, 0],
+              [0, 0, 8, 6, 0, 9, 3, 0, 0],
+              [0, 0, 0, 0, 0, 0, 5, 7, 0],
+              [0, 1, 0, 4, 8, 0, 0, 0, 5],
+              [8, 0, 0, 0, 1, 0, 2, 0, 0],
+              [0, 0, 0, 0, 0, 5, 0, 4, 0]]
+
+easy   = [[0, 3, 0, 0, 8, 0, 0, 0, 6],
+              [5, 0, 0, 2, 9, 4, 7, 1, 0],
+              [0, 0, 0, 3, 0, 0, 5, 0, 0],
+              [0, 0, 5, 0, 1, 0, 8, 0, 4],
+              [4, 2, 0, 8, 0, 5, 0, 3, 9],
+              [1, 0, 8, 0, 3, 0, 6, 0, 0],
+              [0, 0, 3, 0, 0, 7, 0, 0, 0],
+              [0, 4, 1, 6, 5, 3, 0, 0, 2],
+              [2, 0, 0, 0, 4, 0, 0, 6, 0]]
+
+medium = [[3, 0, 8, 2, 9, 6, 0, 0, 0],
+              [0, 4, 0, 0, 0, 8, 0, 0, 0],
+              [5, 0, 2, 1, 0, 0, 0, 8, 7],
+              [0, 1, 3, 0, 0, 0, 0, 0, 0],
+              [7, 8, 0, 0, 0, 0, 0, 3, 5],
+              [0, 0, 0, 0, 0, 0, 4, 1, 0],
+              [1, 2, 0, 0, 0, 7, 8, 0, 3],
+              [0, 0, 0, 8, 0, 0, 0, 2, 0],
+              [0, 0, 0, 5, 4, 2, 1, 0, 6]]
+
+hard   = [[7, 0, 0, 0, 0, 0, 0, 0, 0],
+              [6, 0, 0, 4, 1, 0, 2, 5, 0],
+              [0, 1, 3, 0, 9, 5, 0, 0, 0],
+              [8, 6, 0, 0, 0, 0, 0, 0, 0],
+              [3, 0, 1, 0, 0, 0, 4, 0, 5],
+              [0, 0, 0, 0, 0, 0, 0, 8, 6],
+              [0, 0, 0, 8, 4, 0, 5, 3, 0],
+              [0, 4, 2, 0, 3, 6, 0, 0, 7],
+              [0, 0, 0, 0, 0, 0, 0, 0, 9]]
+
+
+
+
+
 
 def get_valid_values(board, row, col):
 
@@ -87,24 +135,20 @@ def forward_checking(board , history_list = []):
     for i in range(9):
         for j in range(9):
             if board[i][j] < 1:
-                uncompleted_values_info.append(( i , j , get_valid_values(board,i,j)))
+                valid_values = get_valid_values(board,i,j)
+                if valid_values == []:
+                    return None
+                #we have a cell where we cant choose anything
+                uncompleted_values_info.append(( i , j , valid_values))
 
-    #check if we have a good solution
+    #check if all cells are completed
     if uncompleted_values_info == []:
-        #print("!!!!!!!!  This is the solution !!!!!!!!!!!!!!!!!!!")
         return board
     
-    filtered_uncompleted_values_info = [element for element in uncompleted_values_info if element[2] != [] ]
-    
-    #check if we have no choices
-    if filtered_uncompleted_values_info == []:
-        #print("This is not a solution1")
-        return None
-    
     #sort choices based on MRV (we sort based on the number of posibilites of each cell because we want to start completing the cell with the smallest set of possibilities)
-    sorted_filtered_uncompleted_values_info = sorted(filtered_uncompleted_values_info ,  key = lambda element : len(element[2]))
+    sorted_uncompleted_values_info = sorted(uncompleted_values_info ,  key = lambda element : len(element[2]))
 
-    for value_info in sorted_filtered_uncompleted_values_info:
+    for value_info in sorted_uncompleted_values_info:
         row , col , valid_values = value_info
 
         for value in valid_values:
@@ -112,11 +156,12 @@ def forward_checking(board , history_list = []):
             #make a copy of the board
             board_copy = [list(sublist) for sublist in board]
 
-            #complete the copy of the board
+            #complete the cell of the copy
             board_copy[row][col] = value
 
             #print(len(history_list))
             #print(history_list)
+            #print_sudoku(board_copy)
 
             #forward_checking recursively
             result = forward_checking(board_copy , history_list = history_list + [(row,col,value)])
@@ -124,15 +169,14 @@ def forward_checking(board , history_list = []):
             #check if we have a good solution
             if result is not None:
                 return result
+        
+        return None
 
-    #print("This is not a solution2")
     return None
 
-#print(get_valid_values(sudoku,0,2))
 def print_sudoku(board):
     print("This is a sudoku board :")
     return [print(sublist) for sublist in board]
 
-#solution = forward_checking(sudoku_final_test)
-solution = forward_checking(sudoku)
+solution = forward_checking(sudoku_final_test)
 print_sudoku(solution)
