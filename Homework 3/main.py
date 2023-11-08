@@ -47,8 +47,46 @@ class NumberScrabble:
         return [i for i in range(1, 10) if self.state[i] == 0]
     
     def evaluate_heuristic(self):
-        # Basic heuristic for demonstration purposes
-        return len(self.player_b) - len(self.player_a)
+        # Combinations to reach the sum of 15
+        winning_combinations = [
+            [1, 5, 9], [2, 5, 8], [3, 5, 7], [4, 5, 6],
+            [1, 6, 8], [2, 6, 7], [3, 4, 8], [1, 7, 4], [2, 9, 4], [3, 8, 4],
+            [1, 2, 3], [4, 5, 6], [7, 8, 9]
+        ]
+
+        score = 0
+
+        # Calculate how close B is to winning vs how close A is to winning
+        for combination in winning_combinations:
+            b_count = a_count = 0
+            for num in combination:
+                if num in self.player_b:
+                    b_count += 1
+                elif num in self.player_a:
+                    a_count += 1
+
+            if b_count == 2 and a_count == 0:
+                score += 50  # B is one move away from winning
+            elif a_count == 2 and b_count == 0:
+                score -= 50  # A is one move away from winning
+
+            # Extra points if B owns the central square without a block
+            if 5 in self.player_b and b_count == 1 and a_count == 0:
+                score += 10
+
+        # Check if B can block A
+        for num in self.player_a:
+            if num == 5:  # Owning the center is a potential threat
+                score -= 20
+            for combination in winning_combinations:
+                if num in combination:
+                    # Find the numbers B needs to block A
+                    needed_to_block = [x for x in combination if x != num and x not in self.player_a and x not in self.player_b]
+                    if len(needed_to_block) == 1:
+                        # If there is only one number needed to block A and it is available, it's a good move
+                        score -= 10
+
+        return score
     
     def minmax(self, depth, maximizing_player):
         if depth == 0 or self.is_win() or self.is_draw():
@@ -98,10 +136,11 @@ def main():
             elif game.is_draw():
                 print(f"Draw. No one wins.")
                 break
+            else:
+                game.swap_turns()
         else:
             print(f"Invalid move: {move}")
         
-        game.swap_turns()
 
 if __name__ == "__main__":
     main()
