@@ -56,6 +56,7 @@ class NumberScrabble:
 
         score = 0
 
+        # Calculate how close B is to winning vs how close A is to winning
         for combination in winning_combinations:
             b_count = a_count = 0
             for num in combination:
@@ -69,7 +70,6 @@ class NumberScrabble:
             elif a_count == 2 and b_count == 0:
                 score -= 50 
 
-
             if 5 in self.player_b and b_count == 1 and a_count == 0:
                 score += 10
 
@@ -79,7 +79,6 @@ class NumberScrabble:
                 score -= 20
             for combination in winning_combinations:
                 if num in combination:
-                    # Find the numbers B needs to block A
                     needed_to_block = [x for x in combination if x != num and x not in self.player_a and x not in self.player_b]
                     if len(needed_to_block) == 1:
                         # If there is only one number needed to block A and it is available, it's a good move
@@ -118,10 +117,20 @@ class NumberScrabble:
 
 def main():
     game = NumberScrabble()
+    # a_moves = [3, 7, 6] # B wins
+    # a_moves = [1, 6, 3] # B wins
+    a_moves = [1, 9, 2, 6] # B wins
+    # a_moves = [4, 1, 9, 2] # A wins
+    # a_moves = [5, 3, 7] # A wins
+    # a_moves = [3, 4, 5, 2, 1] # Draw
     
     while True:
         if game.turn == 'A':
-            move = int(input(f"[A] choose a number: {game.get_possible_moves()} "))
+            print(f"[A] choose a number: {game.get_possible_moves()}", end=" ")
+            # move = int(input())
+            move = a_moves[0]
+            a_moves.pop(0)
+            print(move)
         else:
             # Bot (player B) makes a move
             _, move = game.minmax(2, True)
