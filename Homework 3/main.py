@@ -47,7 +47,7 @@ class NumberScrabble:
         return [i for i in range(1, 10) if self.state[i] == 0]
     
     def evaluate_heuristic(self):
-        # Combinations to reach the sum of 15
+        
         winning_combinations = [
             [1, 5, 9], [2, 5, 8], [3, 5, 7], [4, 5, 6],
             [1, 6, 8], [2, 6, 7], [3, 4, 8], [1, 7, 4], [2, 9, 4], [3, 8, 4],
@@ -56,7 +56,6 @@ class NumberScrabble:
 
         score = 0
 
-        # Calculate how close B is to winning vs how close A is to winning
         for combination in winning_combinations:
             b_count = a_count = 0
             for num in combination:
@@ -66,11 +65,11 @@ class NumberScrabble:
                     a_count += 1
 
             if b_count == 2 and a_count == 0:
-                score += 50  # B is one move away from winning
+                score += 50 
             elif a_count == 2 and b_count == 0:
-                score -= 50  # A is one move away from winning
+                score -= 50 
 
-            # Extra points if B owns the central square without a block
+
             if 5 in self.player_b and b_count == 1 and a_count == 0:
                 score += 10
 
